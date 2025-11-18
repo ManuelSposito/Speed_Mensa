@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: #4b10c9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon {
+    position: absolute; left: 20px;
+}
+
+.navig {
+    gap: 30px;
+}
+
+
+.navig a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 18px;
+}
+
+.content {
+    position: fixed;
+    top: 50px;
+    
+}

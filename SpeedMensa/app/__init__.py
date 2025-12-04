@@ -6,6 +6,7 @@ from flask_login import LoginManager
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,6 +15,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 login.login_message = 'Devi effettuare il login per accedere a questa pagina.'
+mail = Mail(app)
 
 # Configurazione logging
 if not app.debug:
@@ -47,6 +49,6 @@ if not app.debug:
     app.logger.addHandler(file_handler)
     
     app.logger.setLevel(logging.INFO)
-    app.logger.info('Gestione Mensa startup')
+    app.logger.info('Gestione Speed Mensa')
 
 from app import routes, models, errors

@@ -1,10 +1,14 @@
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from app import db, login
+from app import db, login, app
 from datetime import datetime, timezone, date
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from hashlib import md5
+from time import time
+import jwt
+
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

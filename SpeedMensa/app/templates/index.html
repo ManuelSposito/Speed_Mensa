@@ -1,5 +1,54 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="welcome">
+  <h1>Benvenuto, {{ current_user.nome }}</h1>
+  <p>
+    Qui puoi visualizzare e prenotare i menu disponibili per i prossimi giorni.
+  </p>
+  {% if current_user.is_gestore %}
+  <p>
+    <strong>Sei un gestore:</strong> puoi creare e modificare i menu dalla
+    <a href="{{ url_for('gestore_menu') }}">sezione gestione</a>.
+  </p>
+  {% endif %}
+</div>
 
-{% block content %}
-    <h1>Buongiorno Prof</h1>
-{% endblock %}
+<h2>Menu Disponibili</h2>
+
+{% if menu_disponibili %}
+<div class="menu-grid">
+  {% for menu in menu_disponibili %}
+  <div class="menu-card">
+    <div class="menu-date">{{ menu.data.strftime('%A %d/%m/%Y') }}</div>
+
+    <div class="menu-item"><strong>Primo:</strong> {{ menu.primo }}</div>
+    <div class="menu-item"><strong>Secondo:</strong> {{ menu.secondo }}</div>
+    <div class="menu-item"><strong>Contorno:</strong> {{ menu.contorno }}</div>
+    {% if menu.frutta %}
+    <div class="menu-item"><strong>Frutta:</strong> {{ menu.frutta }}</div>
+    {% endif %} {% if menu.dolce %}
+    <div class="menu-item"><strong>Dolce:</strong> {{ menu.dolce }}</div>
+    {% endif %}
+
+    <div class="menu-price">€ {{ "%.2f"|format(menu.prezzo) }}</div>
+
+    <div class="menu-actions">
+      <div class="orari-info">
+        Orari disponibili:<br />
+        12:00 - 14:00
+      </div>
+      <a
+        href="{{ url_for('prenota', menu_id=menu.id) }}"
+        class="btn btn-success"
+      >
+        Prenota
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="no-menu">
+  <h3>Nessun menu disponibile al momento</h3>
+  <p>Torna più tardi per vedere i nuovi menu!</p>
+</div>
+{% endif %} {% endblock %}

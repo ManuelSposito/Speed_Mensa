@@ -25,17 +25,17 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = db.session.scalar(sa.select(User).where(User.username == username.data))
         if user is not None:
-            raise ValidationError('Username già utilizzato. Scegline un altro.')
+            raise ValidationError('Username utilizzato da altro utente. Scegline un altro.')
 
     def validate_email(self, email):
         user = db.session.scalar(sa.select(User).where(User.email == email.data))
         if user is not None:
-            raise ValidationError('Email già registrata.')
+            raise ValidationError('Email associata ad un utente')
 
     def validate_matricola(self, matricola):
         user = db.session.scalar(sa.select(User).where(User.matricola == matricola.data))
         if user is not None:
-            raise ValidationError('Matricola già registrata.')
+            raise ValidationError('Matricola associata ad un utente.')
 
 class MenuForm(FlaskForm):
     data = DateField('Data', validators=[DataRequired()], format='%Y-%m-%d')
@@ -80,20 +80,33 @@ class EditProfileForm(FlaskForm):
         if username.data != self.original_username:
             user = db.session.scalar(sa.select(User).where(User.username == username.data))
             if user is not None:
-                raise ValidationError('Username già utilizzato.')
+                raise ValidationError('Username in utilizzo da un utente.')
     
     def validate_email(self, email):
         if email.data != self.original_email:
             user = db.session.scalar(sa.select(User).where(User.email == email.data))
             if user is not None:
-                raise ValidationError('Email già registrata.')
+                raise ValidationError('Email non disponibile.')
     
     def validate_matricola(self, matricola):
         if matricola.data != self.original_matricola:
             user = db.session.scalar(sa.select(User).where(User.matricola == matricola.data))
             if user is not None:
-                raise ValidationError('Matricola già registrata.')
+                raise ValidationError('Impossibile assocoiare Matricola.')
 
 
 class CancellaPrenotazioneForm(FlaskForm):
     submit = SubmitField('Cancella Prenotazione')
+
+class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')
+
+    
+class ResetPasswordRequestForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Richiedi il reset della password')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    password2 = PasswordField('Ripeti Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Resetta la Password')

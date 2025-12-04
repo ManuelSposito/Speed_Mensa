@@ -1,12 +1,13 @@
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, MenuForm, PrenotazioneForm, EditProfileForm, CancellaPrenotazioneForm
+from app.forms import LoginForm, RegistrationForm, MenuForm, PrenotazioneForm, EditProfileForm, CancellaPrenotazioneForm, EmptyForm, ResetPasswordRequestForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app.models import User, MenuGiornaliero, Prenotazione, Transazione
 from urllib.parse import urlsplit
 from datetime import datetime, timezone, date, timedelta
 from functools import wraps
+#from app.email import send_password_reset_email
 
 # Decorator per verificare se l'utente è un gestore
 def gestore_required(f):
@@ -122,7 +123,7 @@ def edit_profilo():
     return render_template('edit_profilo.html', title='Modifica Profilo', form=form)
 
 
-# ===== GESTIONE MENU (solo per gestori) =====
+#GESTIONE MENU (PER GESTORI)
 
 @app.route('/gestore/menu')
 @login_required
@@ -224,7 +225,7 @@ def visualizza_prenotazioni_menu(menu_id):
                           title='Prenotazioni Menu', menu=menu, prenotazioni=prenotazioni)
 
 
-# ===== PRENOTAZIONI =====
+#PRENOTAZIONI
 
 @app.route('/prenota/<int:menu_id>', methods=['GET', 'POST'])
 @login_required
@@ -252,11 +253,11 @@ def prenota(menu_id):
         return redirect(url_for('index'))
     
     # Prepara gli orari disponibili
-    orari_con_disponibilita = []
-    for orario in app.config['ORARI_RITIRO']:
-        posti = menu.posti_disponibili_per_orario(orario)
-        if posti > 0:
-            orari_con_disponibilita.append(orario)
+    #orari_con_disponibilita = []
+    #for orario in app.config['ORARI_RITIRO']:
+     #   posti = menu.posti_disponibili_per_orario(orario)
+      #  if posti > 0:
+       #     orari_con_disponibilita.append(orario)
     
     if not orari_con_disponibilita:
         flash('Tutti gli orari sono al completo.')
@@ -266,10 +267,10 @@ def prenota(menu_id):
     
     if form.validate_on_submit():
         # Verifica ancora la disponibilità
-        posti_disponibili = menu.posti_disponibili_per_orario(form.orario_ritiro.data)
-        if posti_disponibili <= 0:
-            flash('Spiacenti, questo orario è ora completo.')
-            return redirect(url_for('prenota', menu_id=menu_id))
+     #   posti_disponibili = menu.posti_disponibili_per_orario(form.orario_ritiro.data)
+      #  if posti_disponibili <= 0:
+       #     flash('Spiacenti, questo orario è ora completo.')
+        #    return redirect(url_for('prenota', menu_id=menu_id))
         
         prenotazione = Prenotazione(
             utente_id=current_user.id,
@@ -311,7 +312,7 @@ def cancella_prenotazione(prenotazione_id):
     return redirect(url_for('profilo'))
 
 
-# ===== PAGAMENTI =====
+#PAGAMENTI
 
 @app.route('/pagamento/<int:prenotazione_id>')
 @login_required
@@ -328,8 +329,8 @@ def pagamento(prenotazione_id):
     
     menu = prenotazione.menu
     
-    # TODO: Implementare integrazione PayPal
-    # Per ora mostriamo solo l'interfaccia
+    #TO DO: Implementare integrazione PayPal
+    #Per ora mostriamo solo l'interfaccia
     
     return render_template('pagamento.html', title='Pagamento', 
                           prenotazione=prenotazione, menu=menu)
@@ -341,6 +342,6 @@ def pagamento(prenotazione_id):
 @login_required
 def paga_con_paypal(prenotazione_id):
     """Pagamento tramite PayPal - DA IMPLEMENTARE"""
-    # TODO: Implementare integrazione PayPal SDK
+    #TO DO: Implementare integrazione PayPal SDK
     flash('Il pagamento PayPal verrà implementato prossimamente.')
     return redirect(url_for('pagamento', prenotazione_id=prenotazione_id))

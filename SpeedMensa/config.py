@@ -11,7 +11,7 @@ class Config:
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 587)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in ['true', 'on', '1']
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'dorus0100@gmail.com'
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'rtml qjbv wswv sdpi'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') 
     ADMINS = ['dorus0100@gmail.com']
     
     # Configurazione Mensa

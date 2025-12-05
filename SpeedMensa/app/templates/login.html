@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block content %}
+<div class="form-container">
+  <h1>Accedi</h1>
+
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    <p>
+      {{ form.username.label }} {{ form.username(size=32) }} {% for error in
+      form.username.errors %}
+      <span style="color: red">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+
+    <p>
+      {{ form.password.label }} {{ form.password(size=32) }} {% for error in
+      form.password.errors %}
+      <span style="color: red">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+
+    <div class="form-group checkbox-group">
+      {{ form.remember_me() }} {{ form.remember_me.label }}
+    </div>
+
+    <p>{{ form.submit(class="submit-btn") }}</p>
+  </form>
+
+  <div class="register-link">
+    Nuovo utente? <a href="{{ url_for('register') }}">Registrati qui</a>
+  </div>
+</div>
+{% endblock %}

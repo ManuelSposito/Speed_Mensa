@@ -1,24 +1,58 @@
 <!DOCTYPE html>
 <html lang="it">
   <head>
-    <meta charset="UTF-8">
-    <title>{{ title }} - Speed Mensa</title
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% if title %}
+    <title>{{ title }} - Mensa Universitaria</title>
+    {% else %}
+    <title>Mensa Universitaria</title>
+    {% endif %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
-    <body>
-      <header>
-        <div class="container">
-          <nav>
-            <h1> Speed Mensa </h1>
-            <ul>
-              <li>Accedi</li>
-              <li>Registrati</li>
-              <li>Home</li>
-              <li>Profilo</li>
-              <li>Esci</li>
-            </ul>
-          </nav>
+
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <h1>Speed Mensa</h1>
+          <ul>
+            {% if current_user.is_anonymous %}
+            <li>
+              <a aria-current="page" href="{{ url_for('login') }}">Accedi</a>
+            </li>
+            <li><a href="{{ url_for('register') }}">Registrati</a></li>
+            {% else %}
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('profilo') }}">Profilo</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %} {% if current_user.is_gestore %}
+            <li><a href="{{ url_for('gestore_menu') }}">Gestione Menu</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+          {% endfor %}
         </div>
-      </header>
-    </body>
+        {% endif %} {% endwith %} {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Mensa Universitaria - Sistema di Gestione Pasti</p>
+      </div>
+    </footer>
+  </body>
 </html>

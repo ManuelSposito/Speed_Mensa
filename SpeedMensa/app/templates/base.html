@@ -8,7 +8,10 @@
     {% else %}
     <title>Mensa Universitaria</title>
     {% endif %}
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
   </head>
 
   <body>
@@ -18,7 +21,9 @@
           <h1>Speed Mensa</h1>
           <ul>
             {% if current_user.is_anonymous %}
-            <li><a href="{{ url_for('login') }}">Accedi</a></li>
+            <li>
+              <a aria-current="page" href="{{ url_for('login') }}">Accedi</a>
+            </li>
             <li><a href="{{ url_for('register') }}">Registrati</a></li>
             {% else %}
             <li><a href="{{ url_for('index') }}">Home</a></li>
@@ -26,11 +31,6 @@
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% endif %} {% if current_user.is_gestore %}
             <li><a href="{{ url_for('gestore_menu') }}">Gestione Menu</a></li>
-            <li>
-              <div class="user-info">
-                <span>{{ current_user.username }}</span>
-              </div>
-            </li>
             {% endif %}
           </ul>
         </nav>

@@ -96,9 +96,9 @@ def profilo():
         Transazione.utente_id == current_user.id
     ).order_by(Transazione.created_at.desc()).limit(10)
     transazioni = db.session.scalars(transazioni_query).all()
-    
+    form = CancellaPrenotazioneForm()
     return render_template('profilo.html', title='Profilo', 
-                          prenotazioni=prenotazioni, transazioni=transazioni)
+                          prenotazioni=prenotazioni, transazioni=transazioni, form=form)
 
 
 @app.route('/edit_profilo', methods=['GET', 'POST'])
@@ -202,7 +202,7 @@ def modifica_menu(menu_id):
         form.dolce.data = menu.dolce
         form.prezzo.data = menu.prezzo
         form.disponibile.data = menu.disponibile
-    return render_template('gestore/modifica_menu.html', title='Modifica Menu', form=form, menu=menu)
+    return render_template('gestore/modifica_menu.html', title='Modifica Menu', form=form, menu=menu, date=date)
 
 
 @app.route('/gestore/menu/<int:menu_id>/prenotazioni')
@@ -259,11 +259,11 @@ def prenota(menu_id):
       #  if posti > 0:
        #     orari_con_disponibilita.append(orario)
     
-    if not orari_con_disponibilita:
-        flash('Tutti gli orari sono al completo.')
-        return redirect(url_for('index'))
+    #if not orari_con_disponibilita:
+     #   flash('Tutti gli orari sono al completo.')
+      #  return redirect(url_for('index'))
     
-    form = PrenotazioneForm(orari_disponibili=orari_con_disponibilita)
+    form = PrenotazioneForm()
     
     if form.validate_on_submit():
         # Verifica ancora la disponibilità

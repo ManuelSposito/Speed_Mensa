@@ -1,0 +1,124 @@
+{% extends "base.html" %} {% block content %}
+<div class="form-container">
+  <h1>Modifica Menu</h1>
+  <p class="menu-date">{{ menu.data.strftime('%A, %d %B %Y') }}</p>
+
+  <div class="current-values">
+    <h4>Valori Attuali:</h4>
+    <p><strong>Primo:</strong> {{ menu.primo }}</p>
+    <p><strong>Secondo:</strong> {{ menu.secondo }}</p>
+    <p><strong>Contorno:</strong> {{ menu.contorno }}</p>
+    {% if menu.frutta %}
+    <p><strong>Frutta:</strong> {{ menu.frutta }}</p>
+    {% endif %} {% if menu.dolce %}
+    <p><strong>Dolce:</strong> {{ menu.dolce }}</p>
+    {% endif %}
+    <p><strong>Prezzo:</strong> €{{ "%.2f"|format(menu.prezzo) }}</p>
+    <p>
+      <strong>Stato:</strong> {% if menu.disponibile %}Disponibile{% else %}Non
+      Disponibile{% endif %}
+    </p>
+  </div>
+
+  {% if menu.data <= date.today() %}
+  <div class="warning-box">
+    <p>
+      <strong>Attenzione:</strong> Questo menu è per una data passata o odierna.
+      Le modifiche potrebbero influenzare prenotazioni esistenti.
+    </p>
+  </div>
+  {% endif %}
+
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    <!-- Data e Prezzo -->
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.data.label }} {{ form.data() }} {% for error in form.data.errors
+        %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+        <span class="help-text">Modifica la data del menu</span>
+      </div>
+
+      <div class="form-group">
+        {{ form.prezzo.label }} {{ form.prezzo(step="0.01", min="0", max="50")
+        }} {% for error in form.prezzo.errors %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+        <span class="help-text">Prezzo del pasto completo</span>
+      </div>
+    </div>
+
+    <!-- Portate Principali -->
+    <h3 class="section-title">Portate Principali</h3>
+
+    <div class="form-group">
+      {{ form.primo.label }} {{ form.primo(size=64) }} {% for error in
+      form.primo.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      {{ form.secondo.label }} {{ form.secondo(size=64) }} {% for error in
+      form.secondo.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      {{ form.contorno.label }} {{ form.contorno(size=64) }} {% for error in
+      form.contorno.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <!-- Portate Opzionali -->
+    <h3 class="section-title">Portate Opzionali</h3>
+
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.frutta.label }} {{ form.frutta(size=32) }} {% for error in
+        form.frutta.errors %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        {{ form.dolce.label }} {{ form.dolce(size=32) }} {% for error in
+        form.dolce.errors %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Disponibilità -->
+    <div class="form-group">
+      <div class="checkbox-group">
+        {{ form.disponibile() }} {{ form.disponibile.label }}
+      </div>
+      <span class="help-text">
+        {% if menu.disponibile %} Deseleziona per nascondere il menu agli
+        studenti {% else %} Seleziona per rendere nuovamente disponibile il menu
+        {% endif %}
+      </span>
+    </div>
+
+    <!-- Submit -->
+    <div class="form-group">{{ form.submit(class="submit-btn") }}</div>
+  </form>
+
+  <div class="action-buttons">
+    <a href="{{ url_for('gestore_menu') }}" class="btn">← Torna alla Lista</a>
+    <a
+      href="{{ url_for('visualizza_prenotazioni_menu', menu_id=menu.id) }}"
+      class="btn"
+    >
+      Vedi Prenotazioni
+    </a>
+  </div>
+</div>
+
+{% endblock %}

@@ -54,13 +54,17 @@ class MenuForm(FlaskForm):
 
 class PrenotazioneForm(FlaskForm):
     orario_ritiro = SelectField('Orario di Ritiro', validators=[DataRequired()])
-    note = TextAreaField('Note (allergie, intolleranze, ecc.)', validators=[Optional(), Length(max=500)])
+    note = TextAreaField('Note (allergie, intolleranze, ecc.)', validators=[Optional(), Length(max=500)], render_kw={"rows": 4, "cols": 50, "style": "resize:none;"})
     submit = SubmitField('Prenota')
     
-    def __init__(self, orari_disponibili=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(PrenotazioneForm, self).__init__(*args, **kwargs)
-        if orari_disponibili:
-            self.orario_ritiro.choices = [(orario, orario) for orario in orari_disponibili]
+        self.orario_ritiro.choices = [
+            ("12:00","12:00"),
+            ("12:30","12:30"),
+            ("13:00","13:00"),
+            ("13:30","13:30"),
+        ]
 
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

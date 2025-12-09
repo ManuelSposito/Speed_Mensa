@@ -86,7 +86,7 @@
         method="post"
         style="display: inline"
       >
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        {{ form.hidden_tag() }}
         <button
           type="submit"
           class="btn btn-danger"

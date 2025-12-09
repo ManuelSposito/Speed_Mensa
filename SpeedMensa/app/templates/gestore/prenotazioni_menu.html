@@ -1,0 +1,90 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="header-section">
+  <h1>Prenotazioni Menu</h1>
+  <h2>{{ menu.data.strftime('%A %d/%m/%Y') }}</h2>
+
+  <div class="menu-info">
+    <div class="info-item">
+      <div class="info-label">Primo</div>
+      {{ menu.primo }}
+    </div>
+    <div class="info-item">
+      <div class="info-label">Secondo</div>
+      {{ menu.secondo }}
+    </div>
+    <div class="info-item">
+      <div class="info-label">Contorno</div>
+      {{ menu.contorno }}
+    </div>
+    <div class="info-item">
+      <div class="info-label">Prezzo</div>
+      €{{ "%.2f"|format(menu.prezzo) }}
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">{{ prenotazioni|length }}</div>
+      <div class="stat-label">Prenotazioni Totali</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">
+        €{{ "%.2f"|format(menu.prezzo * prenotazioni|length) }}
+      </div>
+      <div class="stat-label">Incasso Previsto</div>
+    </div>
+  </div>
+</div>
+
+{% if prenotazioni %}
+<div class="prenotazioni-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Orario Ritiro</th>
+        <th>Nome</th>
+        <th>Matricola</th>
+        <th>Email</th>
+        <th>Note</th>
+        <th>Stato</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pren in prenotazioni %}
+      <tr>
+        <td>
+          <span class="orario-badge">{{ pren.orario_ritiro }}</span>
+        </td>
+        <td>{{ pren.utente.nome }} {{ pren.utente.cognome }}</td>
+        <td>{{ pren.utente.matricola }}</td>
+        <td>{{ pren.utente.email }}</td>
+        <td>
+          {% if pren.note %} {{ pren.note }} {% else %}
+          <span style="color: #95a5a6">-</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if pren.stato == 'pagata' %}
+          <span style="color: #27ae60; font-weight: bold">✓ Pagata</span>
+          {% else %} {{ pren.stato }} {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="no-prenotazioni">
+  <h3>Nessuna prenotazione</h3>
+  <p>Non ci sono ancora prenotazioni per questo menu.</p>
+</div>
+{% endif %}
+
+<div style="text-align: center; margin-top: 2rem">
+  <a href="{{ url_for('gestore_menu') }}" class="btn"
+    >← Torna alla Gestione Menu</a
+  >
+</div>
+
+{% endblock %}

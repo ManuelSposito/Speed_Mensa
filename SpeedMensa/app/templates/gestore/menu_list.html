@@ -1,0 +1,68 @@
+{% extends "base.html" %} {% block content %}
+<div class="header-section">
+  <h1>Gestione Menu</h1>
+  <a href="{{ url_for('crea_menu') }}" class="btn btn-success"
+    >+ Crea Nuovo Menu</a
+  >
+</div>
+
+{% if menu_list %}
+<div class="menu-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Primo</th>
+        <th>Secondo</th>
+        <th>Prezzo</th>
+        <th>Stato</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for menu in menu_list %}
+      <tr>
+        <td><strong>{{ menu.data.strftime('%d/%m/%Y') }}</strong></td>
+        <td>{{ menu.primo }}</td>
+        <td>{{ menu.secondo }}</td>
+        <td>€{{ "%.2f"|format(menu.prezzo) }}</td>
+        <td>
+          {% if menu.disponibile %}
+          <span class="status-badge status-disponibile">Disponibile</span>
+          {% else %}
+          <span class="status-badge status-non-disponibile"
+            >Non Disponibile</span
+          >
+          {% endif %}
+        </td>
+        <td>
+          <div class="action-buttons">
+            <a
+              href="{{ url_for('modifica_menu', menu_id=menu.id) }}"
+              class="btn btn-small"
+              >Modifica</a
+            >
+            <a
+              href="{{ url_for('visualizza_prenotazioni_menu', menu_id=menu.id) }}"
+              class="btn btn-small"
+              >Prenotazioni</a
+            >
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="no-menu">
+  <h3>Nessun menu creato</h3>
+  <p>Inizia creando il tuo primo menu giornaliero!</p>
+  <a
+    href="{{ url_for('crea_menu') }}"
+    class="btn btn-success"
+    style="margin-top: 1rem"
+    >Crea il Primo Menu</a
+  >
+</div>
+{% endif %} {% endblock %}

@@ -9,3 +9,7 @@ body {
     color: black;
     background-color: white;
 }
+.navbar{
+    background-color: blue;
+    padding: 0.5rem 1rem;
+}

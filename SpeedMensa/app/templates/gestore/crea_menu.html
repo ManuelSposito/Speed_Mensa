@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block content %}
+<div class="form-container">
+  <h1>Crea Nuovo Menu</h1>
+  <p class="subtitle">
+    Compila tutti i campi per creare un nuovo menu giornaliero
+  </p>
+
+  <div class="info-box">
+    <strong>Nota:</strong>
+    <ul>
+      <li>Il menu deve essere creato per una data futura</li>
+      <li>Non possono esistere due menu per la stessa data</li>
+      <li>I campi Frutta e Dolce sono opzionali</li>
+    </ul>
+  </div>
+
+  <form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
+    <!-- Data e Prezzo -->
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.data.label }} {{ form.data() }} {% for error in form.data.errors
+        %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+        <span class="help-text">Seleziona la data del menu</span>
+      </div>
+
+      <div class="form-group">
+        {{ form.prezzo.label }} {{ form.prezzo(step="0.01", min="0", max="50")
+        }} {% for error in form.prezzo.errors %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+        <span class="help-text">Prezzo del pasto completo</span>
+      </div>
+    </div>
+
+    <!-- Portate Principali -->
+    <h3 class="section-title">Portate Principali</h3>
+
+    <div class="form-group">
+      {{ form.primo.label }} {{ form.primo(size=64, placeholder="Es: Pasta al
+      pomodoro") }} {% for error in form.primo.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      {{ form.secondo.label }} {{ form.secondo(size=64, placeholder="Es: Pollo
+      arrosto") }} {% for error in form.secondo.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group">
+      {{ form.contorno.label }} {{ form.contorno(size=64, placeholder="Es:
+      Insalata mista") }} {% for error in form.contorno.errors %}
+      <span class="error">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <!-- Portate Opzionali -->
+    <h3 class="section-title">Portate Opzionali</h3>
+
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.frutta.label }} {{ form.frutta(size=32, placeholder="Es: Mela,
+        Banana") }} {% for error in form.frutta.errors %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        {{ form.dolce.label }} {{ form.dolce(size=32, placeholder="Es:
+        Tiramisù") }} {% for error in form.dolce.errors %}
+        <span class="error">{{ error }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Disponibilità -->
+    <div class="form-group">
+      <div class="checkbox-group">
+        {{ form.disponibile() }} {{ form.disponibile.label }}
+      </div>
+      <span class="help-text"
+        >Se deselezionato, il menu non sarà visibile agli studenti</span
+      >
+    </div>
+
+    <!-- Submit -->
+    <div class="form-group">{{ form.submit(class="submit-btn") }}</div>
+  </form>
+
+  <div style="text-align: center; margin-top: 1rem">
+    <a href="{{ url_for('gestore_menu') }}" class="btn"
+      >← Torna alla Lista Menu</a
+    >
+  </div>
+</div>
+
+{% endblock %}

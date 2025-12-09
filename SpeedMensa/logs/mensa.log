@@ -1,4 +1,4 @@
-2025-12-05 08:42:05,135 ERROR: Exception on /profilo [GET] [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py:875]
+2025-12-08 18:17:56,251 ERROR: Exception on /profilo [GET] [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py:875]
 Traceback (most recent call last):
   File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -27,27 +27,16 @@ Traceback (most recent call last):
   File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 1, in top-level template code
     {% extends "base.html" %} {% block content %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\base.html", line 50, in top-level template code
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\base.html", line 43, in top-level template code
     {% endif %} {% endwith %} {% block content %}{% endblock %}
     ^^^^^^^^^^^^^^^^^
-  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 26, in block 'content'
-    <a href="{{ url_for('ricarica_saldo') }}" class="btn btn-success"
-    ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1121, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1110, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-        endpoint,
-    ...<3 lines>...
-        force_external=_external,
-    )
-  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'ricarica_saldo'. Did you mean 'modifica_menu' instead?
-2025-12-05 08:43:39,548 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
-2025-12-05 08:47:06,493 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
-2025-12-05 08:48:24,860 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
-2025-12-05 08:53:52,451 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
-2025-12-05 08:55:49,021 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
-2025-12-05 08:56:41,482 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 89, in block 'content'
+    {{ form.hidden_tag() }}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-12-08 18:18:48,339 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-08 18:25:04,756 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-08 18:31:46,305 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-08 18:32:15,154 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]

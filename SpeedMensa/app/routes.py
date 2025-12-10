@@ -20,22 +20,7 @@ def gestore_required(f):
     return decorated_function
 
 
-@app.route('/')
-@app.route('/index')
-@login_required
-def index():
-    """Homepage con i menu disponibili"""
-    oggi = date.today()
-    # Ottieni i menu dalla data odierna in poi
-    menu_query = sa.select(MenuGiornaliero).where(
-        MenuGiornaliero.data >= oggi,
-        MenuGiornaliero.disponibile == True
-    ).order_by(MenuGiornaliero.data)
-    menu_disponibili = db.session.scalars(menu_query).all()
-    
-    return render_template('index.html', title='Home', menu_disponibili=menu_disponibili)
-
-
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -52,6 +37,24 @@ def login():
             next_page = url_for('index')
         return redirect(next_page)
     return render_template('login.html', title='Accedi', form=form)
+
+
+@app.route('/index')
+@login_required
+def index():
+    """Homepage con i menu disponibili"""
+    oggi = date.today()
+    # Ottieni i menu dalla data odierna in poi
+    menu_query = sa.select(MenuGiornaliero).where(
+        MenuGiornaliero.data >= oggi,
+        MenuGiornaliero.disponibile == True
+    ).order_by(MenuGiornaliero.data)
+    menu_disponibili = db.session.scalars(menu_query).all()
+    
+    return render_template('index.html', title='Home', menu_disponibili=menu_disponibili)
+
+
+
 
 
 @app.route('/logout')
@@ -277,13 +280,13 @@ def prenota(menu_id):
             menu_id=menu_id,
             orario_ritiro=form.orario_ritiro.data,
             note=form.note.data,
-            stato='in_attesa'
+            stato='pagata'
         )
         db.session.add(prenotazione)
         db.session.commit()
         
-        flash('Prenotazione effettuata! Procedi al pagamento.')
-        return redirect(url_for('pagamento', prenotazione_id=prenotazione.id))
+        #flash('Prenotazione effettuata! Procedi al pagamento.')
+        #return redirect(url_for('pagamento', prenotazione_id=prenotazione.id))
     
     return render_template('prenota.html', title='Prenota Pasto', form=form, menu=menu)
 

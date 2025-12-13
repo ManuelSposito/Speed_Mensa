@@ -1,3 +1,17 @@
+
+/* variabili globali riutilizzabili */
+:root { /* Radice del documento; scope per variabili CSS */
+  --primary-color: #007bff; /* Blu per azioni e brand */ /* Variabile colore primaria per pulsanti, link e accenti */
+  --secondary-color: #6c757d; /* Grigio per dettagli */ /* Colore secondario per testi meno importanti e badge neutri */
+  --success-color: #28a745; /* Verde per azioni positive (es. Prenota/Paga) */ /* Colore per stati di successo e pulsanti positivi */
+  --danger-color: #dc3545; /* Rosso per azioni negative (es. Cancella) */ /* Colore per errori, cancellazioni e avvisi critici */
+  --background-light: #f8f9fa; /* Sfondo generale molto chiaro */ /* Sfondo della pagina per dare contrasto con le card */
+  --background-card: #ffffff; /* Sfondo schede/contenitori */ /* Sfondo bianco per elementi contenitore (card, box) */
+  --text-dark: #343a40; /* Colore testo principale scuro */
+  --border-color: #dee2e6; /* Colore base dei bordi e separatori */
+  --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Stack font principale */
+} /* Fine blocco :root */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +19,71 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-family);
     line-height: 1.6;
-    color: black;
-    background-color: white;
-    
+    color: var(--text-dark);
+    background-color: var(--background-light);
+
 }
 
-.navbar {
-    background-color: blue;
-    padding: 0.5rem 1rem;
+.container {
+width: 90%;
+max-width: 75rem;
+margin: 0 auto;
+padding: 0 2%;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    color: white;
+    font-size: 1.5rem;
+}
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    margin-left: 2%;
+}
+
+header nav ul li a {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+header nav ul li a:hover {
+    background-color: rgba(255,255,255,0.15);
+    text-decoration: none;
 }

@@ -9,4 +9,4 @@ L'applicazione web, sviluppata con **Python Flask**, permette agli studenti di:
 - Consultare menu e disponibilità giornaliera
 - Gestire le prenotazioni
 
-  *Sposito Manuel*  *Liguori Alessandro*
+  *Sposito Manuel*  ,  *Liguori Alessandro*

@@ -1,0 +1,96 @@
+2025-12-04 19:28:03,997 ERROR: Exception on /profilo [GET] [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\routes.py", line 100, in profilo
+    return render_template('profilo.html', title='Profilo',
+                          prenotazioni=prenotazioni, transazioni=transazioni)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 1, in top-level template code
+    {% extends "base.html" %} {% block content %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\base.html", line 50, in top-level template code
+    {% endif %} {% endwith %} {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 26, in block 'content'
+    <a href="{{ url_for('ricarica_saldo') }}" class="btn btn-success"
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'ricarica_saldo'. Did you mean 'modifica_menu' instead?
+2025-12-05 08:39:54,416 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-05 08:40:26,270 ERROR: Exception on /profilo [GET] [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\routes.py", line 100, in profilo
+    return render_template('profilo.html', title='Profilo',
+                          prenotazioni=prenotazioni, transazioni=transazioni)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 1, in top-level template code
+    {% extends "base.html" %} {% block content %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\base.html", line 50, in top-level template code
+    {% endif %} {% endwith %} {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 26, in block 'content'
+    <a href="{{ url_for('ricarica_saldo') }}" class="btn btn-success"
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'ricarica_saldo'. Did you mean 'modifica_menu' instead?
+2025-12-05 08:42:00,036 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]

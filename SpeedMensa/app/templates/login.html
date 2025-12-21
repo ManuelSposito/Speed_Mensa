@@ -26,6 +26,12 @@
     <p>{{ form.submit(class="submit-btn") }}</p>
   </form>
 
+  <div>
+    <a href="{{ url_for('reset_password_request') }}">
+      Password dimenticata?
+    </a>
+  </div>
+
   <div class="register-link">
     Nuovo utente? <a href="{{ url_for('register') }}">Registrati qui</a>
   </div>

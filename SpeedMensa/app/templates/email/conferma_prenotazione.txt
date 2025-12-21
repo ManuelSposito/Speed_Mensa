@@ -1,0 +1,26 @@
+Caro {{ user.nome }},
+
+La tua prenotazione è stata confermata con successo!
+
+DETTAGLI PRENOTAZIONE:
+----------------------
+Data: {{ menu.data.strftime('%A %d/%m/%Y') }}
+Orario Ritiro: {{ prenotazione.orario_ritiro }}
+
+MENU:
+-----
+Primo: {{ menu.primo }}
+Secondo: {{ menu.secondo }}
+Contorno: {{ menu.contorno }}
+{% if menu.frutta %}Frutta: {{ menu.frutta }}{% endif %}
+{% if menu.dolce %}Dolce: {{ menu.dolce }}{% endif %}
+
+Prezzo: €{{ "%.2f"|format(menu.prezzo) }}
+
+{% if prenotazione.note %}
+Note: {{ prenotazione.note }}
+{% endif %}
+
+Ricorda di presentarti all'orario indicato per ritirare il tuo pasto.
+
+Grazie per aver scelto Speed Mensa!

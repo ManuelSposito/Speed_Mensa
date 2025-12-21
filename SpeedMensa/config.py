@@ -11,14 +11,15 @@ class Config:
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 587)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in ['true', 'on', '1']
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'dorus0100@gmail.com'
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') 
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')  or 'rtml qjbv wswv sdpi'
     ADMINS = ['dorus0100@gmail.com']
     
     # Configurazione Mensa
     ORARI_RITIRO = ['12:00', '12:30', '13:00', '13:30', '14:00']
     POSTI_DISPONIBILI_PER_SLOT = 50
     
-    # Configurazione PayPal (da implementare)
-    PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID')
+    # Configurazione PayPal
+    PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID') or 'sb' # 'sb' è default per sandbox test
     PAYPAL_CLIENT_SECRET = os.environ.get('PAYPAL_CLIENT_SECRET')
-    PAYPAL_MODE = os.environ.get('PAYPAL_MODE', 'sandbox')  # 'sandbox' o 'live'
+    # Se la mode è 'sandbox', usa l'URL di test, altrimenti quello live
+    PAYPAL_API_BASE = 'https://api-m.sandbox.paypal.com' if os.environ.get('PAYPAL_MODE', 'sandbox') == 'sandbox' else 'https://api-m.paypal.com'

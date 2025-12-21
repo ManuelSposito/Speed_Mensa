@@ -1,0 +1,115 @@
+{% extends "base.html" %} {% block content %}
+<div class="payment-container">
+  <h1 style="text-align: center; margin-bottom: 2rem; color: #333">
+    Completa il Pagamento
+  </h1>
+
+  <div class="payment-summary form-container">
+    <h2 style="color: var(--primary-color); margin-bottom: 1.5rem">
+      Riepilogo Ordine #{{ prenotazione.id }}
+    </h2>
+
+    <div
+      style="
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+      "
+    >
+      <strong style="color: var(--primary-color)"
+        >Menu del {{ menu.data.strftime('%A %d/%m/%Y') }}</strong
+      >
+    </div>
+
+    <div class="menu-detail">
+      <span class="menu-label">Pasto Completo:</span>
+      <span>{{ menu.primo }} + {{ menu.secondo }}</span>
+    </div>
+
+    <div class="menu-detail">
+      <span class="menu-label">Orario Ritiro:</span>
+      <span><strong>{{ prenotazione.orario_ritiro }}</strong></span>
+    </div>
+
+    <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #eee" />
+
+    <div
+      class="payment-row"
+      style="display: flex; justify-content: space-between; font-size: 1.2rem"
+    >
+      <span><strong>Totale da Pagare:</strong></span>
+      <span style="color: var(--danger-color)"
+        ><strong>€{{ "%.2f"|format(menu.prezzo) }}</strong></span
+      >
+    </div>
+  </div>
+
+  <div
+    class="payment-methods form-container"
+    style="margin-top: 2rem; text-align: center"
+  >
+    <h3 style="margin-bottom: 1.5rem">Paga in sicurezza</h3>
+
+    <div id="paypal-button-container"></div>
+
+    <div id="payment-message" class="hidden" style="margin-top: 10px"></div>
+
+    <div style="margin-top: 2rem">
+      <a href="{{ url_for('profilo') }}" class="btn"
+        >Annulla e torna al profilo</a
+      >
+    </div>
+  </div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id={{ config['PAYPAL_CLIENT_ID'] }}&currency=EUR"></script>
+
+<script>
+  paypal
+    .Buttons({
+      // Imposta la transazione
+      createOrder: function (data, actions) {
+        return fetch(
+          "{{ url_for('create_payment', prenotazione_id=prenotazione.id) }}",
+          {
+            method: "post",
+          }
+        )
+          .then((response) => response.json())
+          .then((order) => order.id);
+      },
+
+      // Finalizza la transazione
+      onApprove: function (data, actions) {
+        return fetch(
+          "{{ url_for('execute_payment', prenotazione_id=prenotazione.id) }}",
+          {
+            method: "post",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              orderID: data.orderID,
+            }),
+          }
+        )
+          .then((response) => response.json())
+          .then((details) => {
+            if (details.status === "success") {
+              // Reindirizza alla pagina profilo o successo
+              window.location.href = "{{ url_for('profilo') }}";
+            } else {
+              alert("Pagamento fallito o non completato: " + details.msg);
+            }
+          });
+      },
+
+      onError: function (err) {
+        console.error(err);
+        alert("Si è verificato un errore durante il processo di pagamento.");
+      },
+    })
+    .render("#paypal-button-container");
+</script>
+{% endblock %}

@@ -1,21 +1,30 @@
+:root { 
+  /* Colori del Brand e Funzionali */
+  --primary-color: #007bff;   /* Blu per azioni principali e link */
+  --secondary-color: #6c757d; /* Grigio per dettagli secondari */
+  --success-color: #28a745;   /* Verde per successo/conferma */
+  --danger-color: #dc3545;    /* Rosso per errori/cancellazioni */
+  --warning-color: #ffc107;   /* Giallo per avvisi (Nuovo) */
+  
+  /* Sfondi e Testi */
+  --background-light: #f8f9fa; /* Sfondo pagina */
+  --background-card: #ffffff;  /* Sfondo contenitori */
+  --text-dark: #343a40;        /* Testo principale */
+  --border-color: #dee2e6;     /* Bordi */
+  
+  /* Tipografia */
+  --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
-/* variabili globali riutilizzabili */
-:root { /* Radice del documento; scope per variabili CSS */
-  --primary-color: #007bff; /* Blu per azioni e brand */ /* Variabile colore primaria per pulsanti, link e accenti */
-  --secondary-color: #6c757d; /* Grigio per dettagli */ /* Colore secondario per testi meno importanti e badge neutri */
-  --success-color: #28a745; /* Verde per azioni positive (es. Prenota/Paga) */ /* Colore per stati di successo e pulsanti positivi */
-  --danger-color: #dc3545; /* Rosso per azioni negative (es. Cancella) */ /* Colore per errori, cancellazioni e avvisi critici */
-  --background-light: #f8f9fa; /* Sfondo generale molto chiaro */ /* Sfondo della pagina per dare contrasto con le card */
-  --background-card: #ffffff; /* Sfondo schede/contenitori */ /* Sfondo bianco per elementi contenitore (card, box) */
-  --text-dark: #343a40; /* Colore testo principale scuro */
-  --border-color: #dee2e6; /* Colore base dei bordi e separatori */
-  --font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Stack font principale */
-} /* Fine blocco :root */
-
+/* Reset base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Scorrimento fluido per le ancore */
 }
 
 body {
@@ -23,15 +32,15 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--background-light);
-
 }
 
 .container {
-width: 90%;
-max-width: 75rem;
-margin: 0 auto;
-padding: 0 2%;
+    width: 90%;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 2%;
 }
+
 
 a {
     color: var(--primary-color);
@@ -48,6 +57,7 @@ h1, h2, h3 {
     margin-bottom: 1rem;
 }
 
+
 header {
     background-color: var(--primary-color);
     color: white;
@@ -60,7 +70,7 @@ header h1 {
     font-size: 1.5rem;
 }
 
-header nav{
+header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -74,16 +84,95 @@ header nav ul {
 }
 
 header nav ul li {
-    margin-left: 2%;
+    margin-left: 20px; /* Corretto da 2% per stabilità */
 }
 
 header nav ul li a {
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
 header nav ul li a:hover {
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255,255,255,0.2);
     text-decoration: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* elimina spazi tra celle */
+  font-family: sans-serif;
+}
+
+th, td {
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+thead {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa; /* righe alternate */
+}
+
+tbody tr:hover {
+  background-color: #e6f7ff; /* effetto hover */
+}
+
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    color: #fff;
+    border-radius: 5px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-weight: 500;
+    min-width: 250px;
+    animation: slideIn 0.3s ease-out;
+    transition: opacity 0.3s ease;
+}
+
+/* Varianti colori usando le variabili root */
+.notification-info {
+    background-color: var(--primary-color);
+}
+
+.notification-success {
+    background-color: var(--success-color);
+}
+
+.notification-error {
+    background-color: var(--danger-color);
+}
+
+.notification-warning {
+    background-color: var(--warning-color);
+    color: #333; /* Testo scuro per leggibilità sul giallo */
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+
+.spinner {
+    width: 40px; 
+    height: 40px; 
+    border: 4px solid rgba(255, 255, 255, 0.3); 
+    border-top-color: #fff; 
+    border-radius: 50%; 
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 
+    to { transform: rotate(360deg); } 
 }

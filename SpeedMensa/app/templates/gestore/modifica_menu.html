@@ -32,7 +32,6 @@
   <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
 
-    <!-- Data e Prezzo -->
     <div class="form-row">
       <div class="form-group">
         {{ form.data.label }} {{ form.data() }} {% for error in form.data.errors
@@ -51,7 +50,6 @@
       </div>
     </div>
 
-    <!-- Portate Principali -->
     <h3 class="section-title">Portate Principali</h3>
 
     <div class="form-group">
@@ -75,7 +73,6 @@
       {% endfor %}
     </div>
 
-    <!-- Portate Opzionali -->
     <h3 class="section-title">Portate Opzionali</h3>
 
     <div class="form-row">
@@ -94,7 +91,6 @@
       </div>
     </div>
 
-    <!-- Disponibilità -->
     <div class="form-group">
       <div class="checkbox-group">
         {{ form.disponibile() }} {{ form.disponibile.label }}
@@ -106,7 +102,6 @@
       </span>
     </div>
 
-    <!-- Submit -->
     <div class="form-group">{{ form.submit(class="submit-btn") }}</div>
   </form>
 

@@ -22,10 +22,7 @@
   </div>
   <div style="margin-top: 1.5rem">
     <a href="{{ url_for('edit_profilo') }}" class="btn">Modifica Profilo</a>
-    <!--
-    <a href=" url_for('ricarica_saldo') " class="btn btn-success"
-      >Ricarica Saldo</a>
-  --></div>
+  </div>
 </div>
 
 <div class="section">
@@ -120,15 +117,6 @@
           trans.metodo_pagamento }}
         </div>
       </div>
-      <div>
-        <!--
-        <div
-          class="transazione-importo {% if trans.tipo == 'ricarica' or trans.tipo == 'rimborso' %}positivo{% else %}negativo{% endif %}"
-        >
-          {% if trans.tipo == 'ricarica' or trans.tipo == 'rimborso' %}+{% else
-          %}-{% endif %}€{{ "%.2f"|format(trans.importo) }}
-        </div>
-      --></div>
     </li>
     {% endfor %}
   </ul>

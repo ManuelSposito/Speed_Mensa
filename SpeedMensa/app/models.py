@@ -34,10 +34,28 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def get_reset_password_token(self, expires_in=600):
+        """Genera token per reset password (valido 10 minuti)"""
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'],
+            algorithm='HS256'
+        )
+    
+    @staticmethod
+    def verify_reset_password_token(token):
+        """Verifica token per reset password"""
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+        except:
+            return None
+        return db.session.get(User, id)
+
 
 class MenuGiornaliero(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    data: so.Mapped[date] = so.mapped_column(sa.Date, index=True, unique=True)
+    data: so.Mapped[date] = so.mapped_column(sa.Date, index=True)
     primo: so.Mapped[str] = so.mapped_column(sa.String(200))
     secondo: so.Mapped[str] = so.mapped_column(sa.String(200))
     contorno: so.Mapped[str] = so.mapped_column(sa.String(200))
@@ -54,6 +72,7 @@ class MenuGiornaliero(db.Model):
 
     def __repr__(self):
         return f'<MenuGiornaliero {self.data}>'
+
 
 class Prenotazione(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
@@ -82,6 +101,7 @@ class Prenotazione(db.Model):
         """Cancella la prenotazione"""
         self.stato = 'cancellata'
         self.updated_at = datetime.now(timezone.utc)
+
 
 class Transazione(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Prenotazione Confermata!</h1>
+      </div>
+      <div class="content">
+        <p>Caro <strong>{{ user.nome }}</strong>,</p>
+
+        <p>La tua prenotazione è stata confermata con successo!</p>
+
+        <div class="highlight">
+          {{ menu.data.strftime('%A %d %B %Y') }}<br />
+          Orario Ritiro: <strong>{{ prenotazione.orario_ritiro }}</strong>
+        </div>
+
+        <h2>Menu del Giorno</h2>
+
+        <div class="menu-box">
+          <div class="menu-item">
+            <span class="label">Primo:</span>
+            <span>{{ menu.primo }}</span>
+          </div>
+          <div class="menu-item">
+            <span class="label">Secondo:</span>
+            <span>{{ menu.secondo }}</span>
+          </div>
+          <div class="menu-item">
+            <span class="label">Contorno:</span>
+            <span>{{ menu.contorno }}</span>
+          </div>
+          {% if menu.frutta %}
+          <div class="menu-item">
+            <span class="label">Frutta:</span>
+            <span>{{ menu.frutta }}</span>
+          </div>
+          {% endif %} {% if menu.dolce %}
+          <div class="menu-item">
+            <span class="label">Dolce:</span>
+            <span>{{ menu.dolce }}</span>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="total">Totale: €{{ "%.2f"|format(menu.prezzo) }}</div>
+
+        {% if prenotazione.note %}
+        <div class="info-box">
+          <strong>Note:</strong><br />
+          {{ prenotazione.note }}
+        </div>
+        {% endif %}
+
+        <div class="info-box">
+          <strong>Informazioni Importanti:</strong>
+          <ul style="margin: 10px 0">
+            <li>Presentati in mensa all'orario indicato</li>
+            <li>Porta con te un documento d'identità</li>
+            <li>La prenotazione è nominale e non trasferibile</li>
+          </ul>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px">
+          <strong>Grazie per aver scelto Speed Mensa!</strong><br />
+          Buon appetito!
+        </p>
+      </div>
+      <div class="footer">
+        <p>Speed Mensa - Sistema di Gestione Pasti</p>
+        <p>Questa è un'email di conferma automatica</p>
+      </div>
+    </div>
+  </body>
+</html>

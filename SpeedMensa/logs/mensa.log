@@ -1,0 +1,63 @@
+2025-12-08 18:17:56,251 ERROR: Exception on /profilo [GET] [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py:875]
+Traceback (most recent call last):
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\routes.py", line 100, in profilo
+    return render_template('profilo.html', title='Profilo',
+                          prenotazioni=prenotazioni, transazioni=transazioni)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 1, in top-level template code
+    {% extends "base.html" %} {% block content %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\base.html", line 43, in top-level template code
+    {% endif %} {% endwith %} {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\templates\profilo.html", line 89, in block 'content'
+    {{ form.hidden_tag() }}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\venv\Lib\site-packages\jinja2\environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2025-12-08 18:18:48,339 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-08 18:25:04,756 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-08 18:31:46,305 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-08 18:32:15,154 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 12:07:09,729 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 12:07:14,061 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 12:08:35,178 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 12:14:26,373 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 12:19:06,676 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 12:31:36,416 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 16:37:48,682 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 16:39:35,121 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 16:41:02,536 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 16:48:02,378 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 17:16:29,104 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 17:18:17,491 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-09 17:26:16,872 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-10 13:57:21,556 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-10 14:03:48,845 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-10 18:21:41,383 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-10 18:34:46,771 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-10 18:41:35,922 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-10 18:45:13,609 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-13 15:02:16,573 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
+2025-12-17 11:33:36,270 INFO: Gestione Speed Mensa [in C:\Users\Manue\Desktop\Speed_Mensa\SpeedMensa\app\__init__.py:52]
